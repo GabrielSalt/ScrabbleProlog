@@ -3,6 +3,7 @@
 :- ensure_loaded('bag.pl').
 :- ensure_loaded('parseMove.pl').
 :- ensure_loaded('print.pl').
+:- ensure_loaded('save.pl').
 
 :- dynamic gameState/1.
 :- dynamic isWord/1.

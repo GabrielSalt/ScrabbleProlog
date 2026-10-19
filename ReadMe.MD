@@ -33,7 +33,6 @@ Debug:
     {Continue with cmds}
 
 TODO:
-- Show score after move.
 - First play must touch middle tile.
 - Play connects to board somehow.
 - Keep history of moves along with their scores.

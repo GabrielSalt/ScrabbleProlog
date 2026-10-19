@@ -15,6 +15,7 @@ nextCell(R, C, horizontal, R, C1) :-
 
 % Overlap of existing letter
 playMove([0'(, L, 0') | Rest], Board, (R,C,Direction), Rack, NewBoard, NewRack, WordScore + LScore, WMult) :-
+    !,
     tile(Board, R, C, L),
     letter_score(L, LScore),
     nextCell(R,C,Direction, R1, C1),

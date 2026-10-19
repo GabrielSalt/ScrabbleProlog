@@ -1,3 +1,7 @@
+Requirements:
+- Ciao Prolog
+- words.txt (line-separated dictionary, I've generated mine from Collins' .lxl word list)
+
 Start:
 Terminal -> 
     ciao

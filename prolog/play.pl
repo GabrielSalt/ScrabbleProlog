@@ -1,40 +1,20 @@
 :- ensure_loaded('fileOps.pl').
 :- ensure_loaded('grid.pl').
 :- ensure_loaded('bag.pl').
+:- ensure_loaded('dict.pl').
 :- ensure_loaded('parseMove.pl').
 :- ensure_loaded('print.pl').
 :- ensure_loaded('save.pl').
 
 :- dynamic gameState/1.
-:- dynamic isWord/1.
 
 player(human).
 player(bot).
 
-load_words(File) :-
-    load_file(File, read_word).
+next_player(human, bot).
+next_player(bot, human).
 
-read_word(Codes) :-
-    atom_codes(Word, Codes),
-    assertz(isWord(Word)).
-
-known_word(Word) :-
-    downcase_atom(Word, Lower),
-    (   isWord(Lower)
-    ->  true
-    ;   throw(not_a_word(Word))
-    ).
-
-downcase_atom(Word, Lower) :-
-    atom_codes(Word, Codes),
-    map_lower(Codes, LowerCodes),
-    atom_codes(Lower, LowerCodes).
-map_lower([], []).
-map_lower([Code | Rest], [Lower | RestLower]) :-
-    ( Code >= 0'A, Code =< 0'Z -> Lower is Code + 32 ; Lower = Code ),
-    map_lower(Rest, RestLower).
-
-initialState(state([], racks(InitRackH, InitRackB), scores(0, 0), human, Bag2)) :-
+initialState(state(["human"], [], racks(InitRackH, InitRackB), scores(0, 0), human, Bag2)) :-
     freshBag(Ordered), 
     shuffle(Ordered, Bag),
     draw(Bag, [], InitRackH, Bag1),
@@ -62,16 +42,67 @@ parseMove(Move, Word, R, C, Direction) :-
     isCell(CellCodes, R, C, Direction),
     letters(WordCodes, Word).
 
-makeMove(Move, state(Board, racks(H, B), scores(Hs, Bs), human, Bag), state(NewBoard, racks(H2, B), scores(Hs1, Bs), bot, NewBag)) :-
+% Passing
+makeMove(Move, state(Moves, Board, Racks, Scores, Player, Bag), state(NewMoves, Board, Racks, Scores, Next, Bag)) :-
+    Move = "PASS",
+    !,
+    next_player(Player, Next),
+    record_move(Moves, Move, 0, NewMoves).
+
+% Exchanges
+makeMove(Move, state(Moves, Board, racks(H, B), Scores, human, Bag), state(NewMoves, Board, racks(H2, B), Scores, bot, Bag2)) :-
+    append("EXCHANGE", [0' | TileCodes], Move),
+    !,
+    length(Bag, L),
+    L >= 7,
+    remove_tiles(H, TileCodes, H1),
+    draw(Bag1, H1, H2, Bag2),
+    addToBag(Bag, TileCodes, Bag1),
+    record_move(Moves, Move, 0, NewMoves).
+makeMove(Move, state(Moves, Board, racks(H, B), Scores, bot, Bag), state(NewMoves, Board, racks(H, B2), Scores, human, Bag2)) :-
+    append("EXCHANGE", [0' | TileCodes], Move),
+    length(Bag, L),
+    L >= 7,
+    !,
+    remove_tiles(B, TileCodes, B1),
+    draw(Bag1, B1, B2, Bag2),
+    addToBag(Bag, TileCodes, Bag1),
+    record_move(Moves, Move, 0, NewMoves).
+
+% Ensure first (on-board) move covers middle tile
+makeMove(Move, state(_, [], _, _, _, _), _) :-
     parseMove(Move, Word, R, C, Direction),
-    playMove(Word, Board, (R, C, Direction), H, NewBoard, H1, Ws, Wm),
-    Hs1 is Hs + Ws * Wm,
+    length(Word, L),
+    \+ covers_centre(L, R, C, Direction),
+    throw(must_cover_centre).
+
+makeMove(Move, state(Moves, Board, racks(H, B), scores(Hs, Bs), human, Bag), state(NewMoves, NewBoard, racks(H2, B), scores(Hs1, Bs), bot, NewBag)) :-
+    parseMove(Move, Word, R, C, Direction),
+    playMove(Word, Board, (R, C, Direction), H, NewBoard, H1, Ws, Wm, 0, Connected),
+    ( (Board = [] ; Connected > 0 ; joins(Board, NewBoard)) ->
+        true
+    ;   throw(not_connected)
+    ),
+    Scored is Ws * Wm,
+    Hs1 is Hs + Scored,
+    record_move(Moves, Move, Scored, NewMoves),
     draw(Bag, H1, H2, NewBag).
-makeMove(Move, state(Board, racks(H, B), scores(Hs, Bs), bot, Bag), state(NewBoard, racks(H, B2), scores(Hs, Bs1), human, NewBag)) :-
+makeMove(Move, state(Moves, Board, racks(H, B), scores(Hs, Bs), bot, Bag), state(NewMoves, NewBoard, racks(H, B2), scores(Hs, Bs1), human, NewBag)) :-
     parseMove(Move, Word, R, C, Direction),
-    playMove(Word, Board, (R, C, Direction), B, NewBoard, B1, Ws, Wm),
-    Bs1 is Bs + Ws * Wm,
+    playMove(Word, Board, (R, C, Direction), B, NewBoard, B1, Ws, Wm, 0, Connected),
+    ( (Board = [] ; Connected > 0 ; joins(Board, NewBoard)) ->
+        true
+    ;   throw(not_connected)
+    ),
+    Scored is Ws * Wm,
+    Bs1 is Bs + Scored,
+    record_move(Moves, Move, Scored, NewMoves),
     draw(Bag, B1, B2, NewBag).
+
+record_move(Moves, Move, Points, NewMoves) :-
+    number_codes(Points, PointCodes),
+    append(Move, [0' , 0'+ | PointCodes], Entry),
+    append(Moves, [Entry], NewMoves).
 
 attempt(Move, State0, ok(State)) :-
     makeMove(Move, State0, State), !.
@@ -86,3 +117,13 @@ letters([0'(, Code, 0') | Rest], [0'(, Letter, 0') | Letters]) :-
 letters([Code | Rest], [Letter | Letters]) :-
     atom_codes(Letter, [Code]),
     letters(Rest, Letters).
+
+remove_tiles(Rack, [TileCode | Rest], NewRack) :-
+    tile_atom(TileCode, Letter),
+    remove(Rack, Letter, Rack1),
+    remove_tiles(Rack1, Rest, NewRack).
+remove_tiles(Rack, [], Rack).
+
+tile_atom(0'?, blank) :- !.
+tile_atom(Code, Letter) :-
+    char_code(Letter, Code). 

@@ -1,0 +1,35 @@
+{
+  "id": "13dde52c",
+  "created": 1794857692.608109,
+  "players": [
+    {
+      "name": "Gabriel",
+      "type": "human"
+    },
+    {
+      "name": "Bot",
+      "type": "bot"
+    }
+  ],
+  "moves": [
+    {
+      "player": 0,
+      "move": "DEFLATe 8D",
+      "score": 0,
+      "rack": "L?TAFDE"
+    },
+    {
+      "player": 1,
+      "move": "PASS",
+      "score": 0,
+      "rack": "EYODLRC"
+    }
+  ],
+  "state": {
+    "racks": [
+      "L?TAFDE",
+      "EYODLRC"
+    ],
+    "bag": "EIEEUNIOTESOJVWSSKMYEEGAEGILARSQMUITNNUIEPTTLCAAHRWINONZPEDIIVORDBFBTAANOAOIEGUHO?XRRA"
+  }
+}

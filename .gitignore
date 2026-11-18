@@ -1,3 +1,5 @@
 words.txt
 *.po
 *.itf
+.venv
+__pycache__

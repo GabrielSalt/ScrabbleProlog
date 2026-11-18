@@ -1,0 +1,47 @@
+{
+  "id": "4e4c9987",
+  "created": 1794845867.807839,
+  "players": [
+    {
+      "name": "You",
+      "type": "human"
+    },
+    {
+      "name": "Bot",
+      "type": "bot"
+    }
+  ],
+  "moves": [
+    {
+      "player": 0,
+      "move": "VAT 8H",
+      "score": 0,
+      "rack": "VTTRAWI"
+    },
+    {
+      "player": 1,
+      "move": "PASS",
+      "score": 0,
+      "rack": "EBO?ILO"
+    },
+    {
+      "player": 0,
+      "move": "W(A)IT I7",
+      "score": 0,
+      "rack": "VTTRAWI"
+    },
+    {
+      "player": 1,
+      "move": "PASS",
+      "score": 0,
+      "rack": "EBO?ILO"
+    }
+  ],
+  "state": {
+    "racks": [
+      "VTTRAWI",
+      "EBO?ILO"
+    ],
+    "bag": "UDAQENOIUL?LTFRAASJIRIRTMWIYEVGIOCDTENEEAEBOODHPAEAIYENOZGNTDUXCSEKASNIMEFHEUAGSPNROLR"
+  }
+}

@@ -53,6 +53,13 @@ canon(R, C, A, B) :-
     ;   A = Dc, B = Dr
     ).
 
+covers_centre(L, 8, C, horizontal) :-
+    C =< 8,
+    C + L - 1 >= 8.
+covers_centre(L, R, 8, vertical) :-
+    R =< 8,
+    R + L - 1 >= 8.
+
 % Here R,C refers to distance from centre, 
 % with the smaller number always first,
 % which works thanks to 4-way symmetry.

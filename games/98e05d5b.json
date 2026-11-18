@@ -1,0 +1,22 @@
+{
+  "id": "98e05d5b",
+  "created": 1794857644.41448,
+  "players": [
+    {
+      "name": "Gabriel",
+      "type": "human"
+    },
+    {
+      "name": "Bot",
+      "type": "bot"
+    }
+  ],
+  "moves": [],
+  "state": {
+    "racks": [
+      "NRNODNW",
+      "IQADLBE"
+    ],
+    "bag": "ETDOOSIGIEVUJYETYFISOMOCAREI?ECRPIATEIEFO?ZMBREHWSOIANLEAGERNGTLDTUINHAAEALSVOUTAKURPX"
+  }
+}

@@ -1,0 +1,138 @@
+:root {
+  --sq: 40px;
+  --tw: #d6004a;
+  --dw: #f59494;
+  --tl: #3333e0;
+  --dl: #99c9fa;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #d4d4d4;
+}
+
+button {
+  font: inherit;
+  padding: 4px 10px;
+  background: #fff;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  cursor: pointer;
+}
+button:hover { background: #eee; }
+input { font: inherit; padding: 4px 6px; }
+
+.tabs { display: flex; gap: 4px; padding: 6px 8px 0; background: #bbb; }
+.tabs button { border-radius: 4px 4px 0 0; border-bottom: none; background: #ddd; }
+.tabs button.active { background: #d4d4d4; font-weight: bold; }
+
+.tab { display: none; flex-wrap: wrap; gap: 16px; padding: 12px; align-items: flex-start; }
+.tab.active { display: flex; }
+
+.side {
+  width: 240px;
+  background: #e8e8e8;
+  border: 1px solid #aaa;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.side h3 { margin: 0; display: flex; justify-content: space-between; align-items: center; }
+#share { font-size: 12px; word-break: break-all; }
+
+/* Players + rack strip */
+.top { display: flex; justify-content: space-between; align-items: flex-start; height: 78px; }
+.player { display: flex; gap: 6px; align-items: flex-start; font-size: 18px; }
+.player .score { font-weight: bold; }
+.player.to-move .name { text-decoration: underline; }
+.avatar {
+  width: 72px;
+  height: 72px;
+  background: #9fbbe6 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='24' r='12' fill='%23dbe6f7'/%3E%3Cpath d='M8 64c0-16 11-24 24-24s24 8 24 24z' fill='%23dbe6f7'/%3E%3C/svg%3E");
+}
+.middle { display: flex; align-items: flex-end; gap: 12px; align-self: flex-end; }
+.rack-label { font-size: 13px; padding-bottom: 12px; }
+.rack { display: flex; border: 1px solid #999; background: #c8c8c8; }
+.slot { width: var(--sq); height: var(--sq); border-right: 1px solid #aaa; display: grid; }
+
+/* Board */
+.board {
+  display: grid;
+  grid-template-columns: 20px repeat(15, var(--sq));
+  grid-template-rows: 20px repeat(15, var(--sq));
+  gap: 1px;
+  background: #999;
+  border: 1px solid #999;
+  width: max-content;
+}
+.label {
+  background: #d4d4d4;
+  font: bold 12px monospace;
+  display: grid;
+  place-items: center;
+}
+.sq { background: #c8c8c8; display: grid; }
+.sq.tw { background: var(--tw); }
+.sq.dw { background: var(--dw); }
+.sq.tl { background: var(--tl); }
+.sq.dl { background: var(--dl); }
+#play .sq { cursor: pointer; }
+
+.tile {
+  position: relative;
+  margin: 1px;
+  background: #f6e3a1;
+  border: 1px solid #b8a265;
+  border-radius: 3px;
+  display: grid;
+  place-items: center;
+  font: bold 22px Arial, sans-serif;
+  cursor: pointer;
+}
+.tile sub { position: absolute; right: 2px; bottom: 1px; font-size: 10px; }
+.tile.blank { color: #c00; }
+.tile.last { background: #ffd45c; }
+.tile.pending { background: #fff7d6; outline: 2px solid #3a7; }
+.tile.selected { outline: 2px solid #3a7; transform: translateY(-4px); }
+
+.arrow {
+  display: grid;
+  place-items: center;
+  font: bold 26px Arial, sans-serif;
+  color: #1a7a3a;
+  outline: 2px solid #1a7a3a;
+  outline-offset: -2px;
+}
+
+.controls { display: flex; gap: 6px; margin-top: 8px; }
+.controls input { flex: 1; }
+.status { margin: 6px 0; min-height: 1.2em; }
+
+/* Analysis */
+.games ul { list-style: none; margin: 0; padding: 0; overflow-y: auto; max-height: 640px; }
+.games li { padding: 6px; border-bottom: 1px solid #ccc; cursor: pointer; font-size: 14px; }
+.games li:hover { background: #ddd; }
+.games li.active { background: #cfe0f7; }
+
+.moves { width: 320px; }
+#move-list {
+  display: block;
+  max-height: 600px;
+  overflow-y: auto;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: #fff;
+}
+#move-list td { padding: 3px 6px; white-space: nowrap; }
+#move-list td:first-child { color: #777; }
+#move-list tr:nth-child(even) { background: #f3f3f3; }
+#move-list .move { cursor: pointer; border-radius: 3px; }
+#move-list .move:hover { background: #e4e4e4; }
+#move-list .move.active { background: #ffd45c; }
+#move-list .total { color: #777; }
+.nav { display: flex; gap: 4px; }
+.nav button { flex: 1; font-size: 20px; }

@@ -23,7 +23,19 @@ Ciao ->
 Where WORD is formatted as so:
 Normal Letters are shown in UPPERCASE
 Blanks are shown with their adopted letter in LOWERCASE
-Existing Letters are shown 
+Existing Letters are shown in brackets
+
+POS is formatted as so:
+Number indicating Row
+Letter indicating Column
+Number first indicates Horizontal Placement and Vice Versa
+
+Web UI:
+    python3 -m venv .venv && .venv/bin/pip install -r server/requirements.txt
+    .venv/bin/python server/app.py
+    -> http://localhost:8000 (friends: http://<your-ip>:8000)
+    server/engine.py keeps one Ciao process running (prolog/bridge.pl) and
+    passes the game state back and forth. Games are saved to games/*.json.
 
 Debug:
     nodebug.
@@ -33,6 +45,4 @@ Debug:
     {Continue with cmds}
 
 TODO:
-- First play must touch middle tile.
-- Play connects to board somehow.
-- Keep history of moves along with their scores.
+- Exchange blank

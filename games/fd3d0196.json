@@ -1,0 +1,22 @@
+{
+  "id": "fd3d0196",
+  "created": 1794857645.126382,
+  "players": [
+    {
+      "name": "Gabriel",
+      "type": "human"
+    },
+    {
+      "name": "Bot",
+      "type": "bot"
+    }
+  ],
+  "moves": [],
+  "state": {
+    "racks": [
+      "OIEATAO",
+      "GAETDBE"
+    ],
+    "bag": "OVLEPOHOOJ?ECNSBNEGLAAYVSCAHDYIRRNEIDEAOMPU?GNTITAQEROIEENFWSINULFITSAKDZRMRXIUILWETUR"
+  }
+}

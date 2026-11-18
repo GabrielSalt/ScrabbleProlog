@@ -1,11 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scrabble</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="script.js"></script>
 </head>
 <body>
-    <
+  <nav class="tabs">
+    <button data-tab="play" class="active">Play</button>
+    <button data-tab="analysis">Analysis</button>
+  </nav>
+
+  <section id="play" class="tab active">
+    <div class="game">
+      <div class="top">
+        <div class="player"><div class="avatar"></div><span class="name"></span> <span class="score"></span></div>
+        <div class="middle">
+          <button id="shuffle" title="Shuffle">&#x21bb;</button>
+          <div class="rack" id="play-rack"></div>
+        </div>
+        <div class="player right"><span class="name"></span> <span class="score"></span><div class="avatar"></div></div>
+      </div>
+      <div class="board" id="play-board"></div>
+      <div class="controls">
+        <input id="move-input" placeholder="or type: WORD 8H">
+        <button id="submit">Submit</button>
+        <button id="recall">Recall</button>
+        <button id="pass">Pass</button>
+        <button id="exchange">Exchange</button>
+      </div>
+      <p class="status" id="play-status"></p>
+    </div>
+    <aside class="side">
+      <h3>New game</h3>
+      <input id="name" value="You">
+      <button id="new-bot">vs Bot</button>
+      <button id="new-friend">vs Friend</button>
+      <button id="new-botbot">Bot vs Bot</button>
+      <p id="share"></p>
+    </aside>
+  </section>
+
+  <section id="analysis" class="tab">
+    <aside class="side games">
+      <h3>Games <button id="refresh" title="Refresh">&#x21bb;</button></h3>
+      <ul id="game-list"></ul>
+    </aside>
+    <div class="game">
+      <div class="top">
+        <div class="player"><div class="avatar"></div><span class="name"></span> <span class="score"></span></div>
+        <div class="middle">
+          <span class="rack-label" id="rack-label"></span>
+          <div class="rack" id="analysis-rack"></div>
+        </div>
+        <div class="player right"><span class="name"></span> <span class="score"></span><div class="avatar"></div></div>
+      </div>
+      <div class="board" id="analysis-board"></div>
+    </div>
+    <aside class="side moves">
+      <table id="move-list"></table>
+      <div class="nav">
+        <button id="first" title="Start (Home / Up)">&laquo;</button>
+        <button id="prev" title="Back (Left)">&lsaquo;</button>
+        <button id="next" title="Forward (Right)">&rsaquo;</button>
+        <button id="last" title="End (End / Down)">&raquo;</button>
+      </div>
+    </aside>
+  </section>
 </body>
 </html>

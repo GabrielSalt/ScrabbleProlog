@@ -1,0 +1,22 @@
+{
+  "id": "dc2447cd",
+  "created": 1794845849.954296,
+  "players": [
+    {
+      "name": "You",
+      "type": "human"
+    },
+    {
+      "name": "Bot",
+      "type": "bot"
+    }
+  ],
+  "moves": [],
+  "state": {
+    "racks": [
+      "TRIIUDT",
+      "VRAOEEG"
+    ],
+    "bag": "YIISRNUCEHLTPOIUJSGFFHOLQDAAICD?WASBAIUTIEGKEIAAEBTTWOENEPEOEMYVN?ORSAMRRDLNEOLONZNEAX"
+  }
+}

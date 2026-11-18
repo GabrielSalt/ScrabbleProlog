@@ -1,0 +1,17 @@
+{
+  "id": "sample",
+  "created": 1763300000,
+  "players": [
+    {"name": "Bot A", "type": "bot"},
+    {"name": "Bot B", "type": "bot"}
+  ],
+  "moves": [
+    {"player": 0, "move": "HELLO 8D", "score": 24, "rack": "EHLLOTR"},
+    {"player": 1, "move": "(H)ATS D8", "score": 7, "rack": "AST?NIE"},
+    {"player": 0, "move": "(O)X H8", "score": 9, "rack": "TRXAEIU"},
+    {"player": 1, "move": "PASS", "score": 0, "rack": "?NIEUOT"},
+    {"player": 0, "move": "EXCHANGE IU", "score": 0, "rack": "TRAEIUQ"},
+    {"player": 1, "move": "bU(S)T 11B", "score": 6, "rack": "?NIEUOT"}
+  ],
+  "state": {"racks": ["TRAEQDN", "NIEOLRA"], "over": true}
+}

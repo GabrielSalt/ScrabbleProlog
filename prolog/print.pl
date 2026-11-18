@@ -60,7 +60,7 @@ fill([sq(R, C, L) | Rest], List) :-
     fill(Rest, List).
 
 show :-
-    gameState(state(Board, racks(Human, _), scores(Hs, Bs), human, _)),
+    gameState(state(_, Board, racks(Human, _), scores(Hs, Bs), human, _)),
     printBoard(Board, X),
     format("~s", [X]),
     HumanScore is Hs,
@@ -68,7 +68,7 @@ show :-
     write(Human), nl,
     write(scores(HumanScore, BotScore)), nl.
 show :-
-    gameState(state(Board, racks(_, Bot), scores(Hs, Bs), bot, _)),
+    gameState(state(_, Board, racks(_, Bot), scores(Hs, Bs), bot, _)),
     printBoard(Board, X),
     format("~s", [X]),
     HumanScore is Hs,

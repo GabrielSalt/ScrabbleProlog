@@ -1,21 +1,14 @@
-const { SWIPL } = await import(
-    "https://SWI-Prolog.github.io/npm-swipl-wasm/7/0/6/dynamic-import.js"
-  );
-const swipl = await SWIPL({ arguments: ["-q"] });
+import { initPlay } from "./play.js";
+import { initAnalysis, showGames } from "./analysis.js";
 
-const text = (url) => fetch(url).then((r) => r.text());
-const [play, words, fileOps, grid, bag, wordList] = await Promise.all([
-  text("webInterface/play.pl"),
-  text("static/words.pl"),
-  text("fileOps.pl"),
-  text("static/grid.pl"),
-  text("static/bag.pl"),
-  text("words.txt"),
-]);
-swipl.FS.writeFile("/play.pl", play);
-swipl.FS.writeFile("/words.pl", words);
-swipl.FS.writeFile("/fileOps.pl", fileOps);
-swipl.FS.writeFile("/grid.pl", grid);
-swipl.FS.writeFile("/bag.pl", bag);
-swipl.FS.writeFile("/words.txt", wordList);
-swipl.prolog.consult("/play.pl");
+for (const btn of document.querySelectorAll(".tabs button")) {
+  btn.onclick = () => {
+    document.querySelectorAll(".tabs button, .tab").forEach((el) => el.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(btn.dataset.tab).classList.add("active");
+    if (btn.dataset.tab === "analysis") showGames();
+  };
+}
+
+initPlay();
+initAnalysis();

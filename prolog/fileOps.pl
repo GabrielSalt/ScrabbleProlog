@@ -6,10 +6,11 @@ load_file(File, Func) :-
     close(In).
 
 read_lines(In, Func) :-
+    repeat,
     get_line(In, Line),
     (   Line == end_of_file
-    ->  true
+    ->  !
     ;   Goal =.. [Func, Line],
         call(Goal),
-        read_lines(In, Func)
+        fail
     ).

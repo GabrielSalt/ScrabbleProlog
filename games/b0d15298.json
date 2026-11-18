@@ -1,0 +1,22 @@
+{
+  "id": "b0d15298",
+  "created": 1794845844.1174688,
+  "players": [
+    {
+      "name": "You",
+      "type": "human"
+    },
+    {
+      "name": "Bot",
+      "type": "bot"
+    }
+  ],
+  "moves": [],
+  "state": {
+    "racks": [
+      "RIGARWT",
+      "RROSBIM"
+    ],
+    "bag": "YUTIELNAVZSAEUUIA?EAENFANYSOFPRLNAEDDCITHIGEAEWIEQGEUXDLOSCOIOOMEJNKEDNORHITEL?TTBAOPV"
+  }
+}

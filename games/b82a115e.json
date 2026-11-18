@@ -1,0 +1,35 @@
+{
+  "id": "b82a115e",
+  "created": 1794857660.4239712,
+  "players": [
+    {
+      "name": "Gabriel",
+      "type": "human"
+    },
+    {
+      "name": "Bot",
+      "type": "bot"
+    }
+  ],
+  "moves": [
+    {
+      "player": 0,
+      "move": "NOWNING 8D",
+      "score": 0,
+      "rack": "INWGONN"
+    },
+    {
+      "player": 1,
+      "move": "PASS",
+      "score": 0,
+      "rack": "RNSIVQI"
+    }
+  ],
+  "state": {
+    "racks": [
+      "INWGONN",
+      "RNSIVQI"
+    ],
+    "bag": "IOLAUYOOPIEUEOIVENAEOBMOEIZCRECEEDTTRAXIRLGDW?UDSO?LFGTBLERNKIEEUTYTEFDPJSRAHAAMAASHAT"
+  }
+}

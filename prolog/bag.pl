@@ -45,6 +45,22 @@ draw(Bag, Tiles, Result, BagR) :-
     draw_letter(Bag, Bag1, L),
     draw(Bag1, [L | Tiles], Result, BagR).
 
+addToBag(Bag, [], Bag).
+addToBag(Bag, [TileCode | Rest], NewBag) :-
+    length(Bag, L),
+    random(1, L, Index),
+    addAtN([], Bag, TileCode, Bag1, Index),
+    addToBag(Bag1, Rest, NewBag).
+
+addAtN(Before, After, TileCode, NewBag, 0) :-
+    char_code(Tile, TileCode),
+    reverse(Before, Prefix),
+    append(Prefix, [Tile | After], NewBag).
+addAtN(Before, [Front | After], TileCode, NewBag, N) :-
+    N > 0,
+    N1 is N - 1,
+    addAtN([Front | Before], After, TileCode, NewBag, N1).
+
 draw_letter([Tile | Bag], Bag, Tile).
 
 letter_score('A', 1).
